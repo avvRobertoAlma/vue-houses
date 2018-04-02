@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="media-right">
-    <button class="button"><i class="fa fa-edit"></i></button>
+    <router-link v-bind:to="{ name: 'EditHouse', params: { id: house.id } }"><button class="button"><i class="fa fa-edit"></i></button></router-link>
     <button class="button"><i class="fa fa-trash"></i></button>
   </div>
 </article>
@@ -27,9 +27,16 @@
 
 
 <script>
+import HouseService from '@/services/HouseService'
 export default {
     name: 'HouseItem',
-    props: ['house']
+    props: ['house'],
+    methods: {
+      async deleteHouse(id){
+        await HouseService.deleteHouse(id);
+        this.$router.push({name: 'HousesList'});
+      }
+    }
 }
 
 </script>

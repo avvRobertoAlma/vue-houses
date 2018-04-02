@@ -3,6 +3,7 @@
 <nav class="level">
     <div class="level-left"></div>
     <div class="level-right">
+        <p class="level-item" @click="sortByPrice">Prezzo</p>
         <p class="level-item"><a class="button is-success"><router-link v-bind:to="{ name: 'NewHouse'}">Nuovo Immobile</router-link></a></p>
     </div>
     
@@ -25,7 +26,8 @@ export default {
     name: 'HousesList',
     data () {
         return {
-            houses: []
+            houses: [],
+            order: '',
         }
     },
     mounted() {
@@ -35,6 +37,20 @@ export default {
         async getHouses() {
             const response = await HouseService.getHouses();
             this.houses = response.data;
+        },
+        sortByPrice() {
+            if(!this.order || this.order == 'ascending'){
+                this.houses.sort((a,b) =>{
+                return b.price - a.price;
+            })
+            this.order = 'descending';
+            } else {
+                 this.houses.sort((a,b) =>{
+                return a.price - b.price;
+            })
+            this.order = 'ascending';
+            
+        }
         }
     },
     components: {

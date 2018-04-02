@@ -17,6 +17,14 @@ router.get('/', (req, res, next)=>{
     res.send(houses);
 });
 
+router.get('/:id', (req, res, next)=>{
+    const house = houses.filter((element)=>{
+        return element.id == req.params.id
+    });
+    console.log(house);
+    res.send(house);
+})
+
 router.post('/', (req, res, next)=>{
     const newHouse = {
         id: uuid(),
@@ -36,6 +44,45 @@ router.post('/', (req, res, next)=>{
     console.log('saved!')
     });
     res.sendStatus(200);
+})
+
+router.put('/:id', (req, res, next)=>{
+    const index = houses.findIndex((obj)=> obj.id == req.params.id)
+    console.log(index);
+
+    houses[index].name = req.body.name;
+    houses[index].location = req.body.location;
+    houses[index].description = req.body.description;
+    houses[index].image = req.body.image;
+    houses[index].url = req.body.url;
+    houses[index].price = req.body.price;
+    houses[index].review = req.body.review;
+
+    //save new houses array
+    const housesJson = JSON.stringify(houses);
+    console.log(housesJson);
+    fs.writeFile(path.join(__dirname, '../', 'data', 'houses.json'), housesJson, (err)=>{
+        if(err) { return console.log(err)}
+    console.log('saved!')
+    });
+    res.sendStatus(200);
+
+
+})
+
+router.delete('/:id', (req, res, next)=>{
+    const index = houses.findIndex((obj)=> obj.id == req.params.id)
+    console.log(index);
+    houses.splice(index, 1);
+
+    const housesJson = JSON.stringify(houses);
+    console.log(housesJson);
+    fs.writeFile(path.join(__dirname, '../', 'data', 'houses.json'), housesJson, (err)=>{
+        if(err) { return console.log(err)}
+    console.log('removed!')
+    });
+    res.sendStatus(200);
+
 })
 
 module.exports = router;
