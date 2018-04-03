@@ -45,11 +45,7 @@ router.post('/', (req, res, next)=>{
     res.sendStatus(200);
 });
 
-router.put('/:id', (req, res, next, err)=>{
-    console.log('chiamata PUT')
-    if(err){
-        return console.log(err);
-    }
+router.put('/:id', (req, res, next)=>{
     const index = houses.findIndex((obj)=> obj.id == req.params.id)
     console.log(index);
 
@@ -61,7 +57,7 @@ router.put('/:id', (req, res, next, err)=>{
     houses[index].url = req.body.url;
     houses[index].price = req.body.price;
     houses[index].review = req.body.review;
-
+    
     //save new houses array
     const housesJson = JSON.stringify(houses);
     console.log(housesJson);
@@ -69,9 +65,8 @@ router.put('/:id', (req, res, next, err)=>{
         if(err) { return console.log(err)}
     console.log('saved!')
     });
+
     res.sendStatus(200);
-
-
 });
 
 router.delete('/:id', (req, res, next)=>{
