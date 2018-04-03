@@ -29,6 +29,12 @@
                 </div>
             </div>
             <div class="field">
+                <label class="label">Dimensioni</label>
+                <div class="control">
+                    <input type="number" class="input" v-model="size">
+                </div>
+            </div>
+            <div class="field">
                 <label class="label">Immagine</label>
                 <div class="control">
                     <input type="text" class="input" v-model="image">
@@ -70,6 +76,7 @@ export default {
             name:'',
             location:'',
             description:'',
+            size:'',
             image:'',
             url:'',
             price:'',
@@ -88,6 +95,7 @@ export default {
             this.name = house.name;
             this.location = house.location;
             this.description = house.description;
+            this.size = house.size;
             this.image = house.image;
             this.url = house.url;
             this.price = house.price;
@@ -99,6 +107,7 @@ export default {
                 name: this.name,
                 location: this.location,
                 description: this.description,
+                size: this.size,
                 image: this.image,
                 url: this.url,
                 price: this.price,

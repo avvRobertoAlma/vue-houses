@@ -3,6 +3,7 @@
 <nav class="level">
     <div class="level-left"></div>
     <div class="level-right">
+        <p class="level-item" @click="sortBySize">Grandezza</p>
         <p class="level-item" @click="sortByPrice">Prezzo</p>
         <p class="level-item"><a class="button is-success"><router-link v-bind:to="{ name: 'NewHouse'}">Nuovo Immobile</router-link></a></p>
     </div>
@@ -27,7 +28,8 @@ export default {
     data () {
         return {
             houses: [],
-            order: '',
+            priceOrder: '',
+            sizeOrder: '',
         }
     },
     mounted() {
@@ -39,16 +41,30 @@ export default {
             this.houses = response.data;
         },
         sortByPrice() {
-            if(!this.order || this.order == 'ascending'){
+            if(!this.priceOrder || this.priceOrder == 'ascending'){
                 this.houses.sort((a,b) =>{
                 return b.price - a.price;
             })
-            this.order = 'descending';
+            this.priceOrder = 'descending';
             } else {
                  this.houses.sort((a,b) =>{
                 return a.price - b.price;
             })
-            this.order = 'ascending';
+            this.priceOrder = 'ascending';
+            
+        }
+        },
+        sortBySize() {
+            if(!this.sizeOrder || this.sizeOrder == 'ascending'){
+                this.houses.sort((a,b) =>{
+                return b.size - a.size;
+            })
+            this.sizeOrder = 'descending';
+            } else {
+                 this.houses.sort((a,b) =>{
+                return a.size - b.size;
+            })
+            this.sizeOrder = 'ascending';
             
         }
         }

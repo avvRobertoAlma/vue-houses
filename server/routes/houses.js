@@ -31,6 +31,7 @@ router.post('/', (req, res, next)=>{
         name: req.body.name,
         location: req.body.location,
         description: req.body.description,
+        size: req.body.size,
         image: req.body.image,
         url: req.body.url,
         price: req.body.price,
@@ -54,6 +55,7 @@ router.put('/:id', (req, res, next)=>{
     houses[index].location = req.body.location;
     houses[index].description = req.body.description;
     houses[index].image = req.body.image;
+    house[index].size = req.body.size;
     houses[index].url = req.body.url;
     houses[index].price = req.body.price;
     houses[index].review = req.body.review;

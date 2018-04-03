@@ -9,7 +9,7 @@
   <div class="media-content">
     <div class="content">
       <p>
-        <strong><a :href=house.url target="_blank">{{house.name}}</a></strong> <small>{{house.location}}</small> <i class="fa fa-euro-sign fa-sm"></i> <small><strong>{{house.price}}</strong></small>
+        <strong><a :href=house.url target="_blank">{{house.name}}</a></strong> <i class="fa fa-home sm"></i><strong>{{house.size}}</strong> <small>{{house.location}}</small> <i class="fa fa-euro-sign fa-sm"></i> <small><strong>{{house.price}}</strong></small>
         <br/>
         {{house.description}}
         <br/>
