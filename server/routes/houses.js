@@ -10,7 +10,6 @@ fs.readFile(path.join(__dirname, '../', 'data', 'houses.json'), 'utf8', (err, da
         return console.log(err);
     }
     houses = JSON.parse(data);
-    console.log(houses);
 })
 
 router.get('/', (req, res, next)=>{
@@ -39,15 +38,18 @@ router.post('/', (req, res, next)=>{
     };
     houses.push(newHouse);
     const housesJson = JSON.stringify(houses);
-    console.log(housesJson);
-    fs.writeFile(path.join(__dirname, '../', 'data', 'houses.json'), housesJson, (err)=>{
+        fs.writeFile(path.join(__dirname, '../', 'data', 'houses.json'), housesJson, (err)=>{
         if(err) { return console.log(err)}
     console.log('saved!')
     });
     res.sendStatus(200);
-})
+});
 
-router.put('/:id', (req, res, next)=>{
+router.put('/:id', (req, res, next, err)=>{
+    console.log('chiamata PUT')
+    if(err){
+        return console.log(err);
+    }
     const index = houses.findIndex((obj)=> obj.id == req.params.id)
     console.log(index);
 
@@ -55,7 +57,7 @@ router.put('/:id', (req, res, next)=>{
     houses[index].location = req.body.location;
     houses[index].description = req.body.description;
     houses[index].image = req.body.image;
-    house[index].size = req.body.size;
+    houses[index].size = req.body.size;
     houses[index].url = req.body.url;
     houses[index].price = req.body.price;
     houses[index].review = req.body.review;
@@ -70,7 +72,7 @@ router.put('/:id', (req, res, next)=>{
     res.sendStatus(200);
 
 
-})
+});
 
 router.delete('/:id', (req, res, next)=>{
     const index = houses.findIndex((obj)=> obj.id == req.params.id)
@@ -85,6 +87,6 @@ router.delete('/:id', (req, res, next)=>{
     });
     res.sendStatus(200);
 
-})
+});
 
 module.exports = router;
