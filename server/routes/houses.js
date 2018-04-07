@@ -34,7 +34,8 @@ router.post('/', (req, res, next)=>{
         image: req.body.image,
         url: req.body.url,
         price: req.body.price,
-        review: req.body.review
+        review: req.body.review,
+        visited: req.body.visited,
     };
     houses.push(newHouse);
     const housesJson = JSON.stringify(houses);
@@ -57,6 +58,7 @@ router.put('/:id', (req, res, next)=>{
     houses[index].url = req.body.url;
     houses[index].price = req.body.price;
     houses[index].review = req.body.review;
+    houses[index].visited = req.body.visited;
     
     //save new houses array
     const housesJson = JSON.stringify(houses);

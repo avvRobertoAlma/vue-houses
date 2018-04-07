@@ -52,6 +52,10 @@
                     <input type="number" class="input" v-model="price">
                 </div>
             </div>
+            <label class="checkbox">
+                <input type="checkbox" id="visitedCheckbox" :checked="visited" @change="handleVisited">
+                Visitato?
+            </label>
             <div class="field">
                 <label class="label">Commenti</label>
                 <div class="control">
@@ -80,7 +84,8 @@ export default {
             image:'',
             url:'',
             price:'',
-            review:''
+            review:'',
+            visited: '',
         }
     },
     mounted() {
@@ -100,6 +105,7 @@ export default {
             this.url = house.url;
             this.price = house.price;
             this.review = house.review;
+            this.visited = house.visited;
         },
         async updateHouse(){
             await HouseService.updateHouse({
@@ -111,9 +117,18 @@ export default {
                 image: this.image,
                 url: this.url,
                 price: this.price,
-                review: this.review
+                review: this.review,
+                visited: this.visited,
             });
             this.$router.push({ name: 'HousesList'});
+        },
+        handleVisited(){
+            const checkbox = document.querySelector('#visitedCheckbox');
+            if(checkbox.checked){
+                return this.visited = true;
+            } else {
+                return this.visited = false;
+            }
         }
     }
 }
